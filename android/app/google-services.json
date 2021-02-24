@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "396500394898",
+    "project_id": "mushroommall",
+    "storage_bucket": "mushroommall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396500394898:android:761ad0e25b456a28b8974b",
+        "android_client_info": {
+          "package_name": "acth.rmutsv.browniesuppermall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396500394898-ambina1mpi8d6sf1o4ckcot9cl41jdse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_oeLSGsflCQDE9ppc-BXbzNnxw1ouVsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "396500394898-ambina1mpi8d6sf1o4ckcot9cl41jdse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
