@@ -59,9 +59,16 @@ class _AddInformatinState extends State<AddInformatin> {
     );
   }
 
-  Column buildContent() {
-    return Column(
-      children: [buildRowImage(), buildName(), buildUploadData()],
+  Widget buildContent() {
+    return SingleChildScrollView(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          buildRowImage(),
+          buildName(),
+          buildUploadData(),
+        ],
+      ),
     );
   }
 
@@ -164,8 +171,11 @@ class _AddInformatinState extends State<AddInformatin> {
     return Container(
       width: screen * 0.5,
       height: screen * 0.5,
-      child:
-          file == null ? MyStyle().showImage() : Image(image: FileImage(file)),
+      child: file == null
+          ? typeUserModel.urlshopper == null
+              ? MyStyle().showImage()
+              : Image.network(typeUserModel.urlshopper)
+          : Image(image: FileImage(file)),
     );
   }
 }

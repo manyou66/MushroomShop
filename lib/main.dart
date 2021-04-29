@@ -1,5 +1,6 @@
 import 'package:browniesuppermall/models/typeuser.dart';
 import 'package:browniesuppermall/states/add_information.dart';
+import 'package:browniesuppermall/states/add_product.dart';
 import 'package:browniesuppermall/states/authen.dart';
 import 'package:browniesuppermall/states/create_account.dart';
 import 'package:browniesuppermall/states/my_service_buyer.dart';
@@ -17,6 +18,7 @@ final Map<String, WidgetBuilder> map = {
   '/myServiceBuyer': (BuildContext context) => MyServiceBuyer(),
   '/myServiceShopper': (BuildContext context) => MyServiceShopper(),
   '/addInformation':(BuildContext context) => AddInformatin(),
+  '/addProduct':(BuildContext context) => AddProduct(),
 };
 
 String iniRoute = '/authen';

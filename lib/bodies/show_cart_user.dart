@@ -9,7 +9,7 @@ class _ShowCartUserState extends State<ShowCartUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      body: Text('show cart'),
     );
   }
 }

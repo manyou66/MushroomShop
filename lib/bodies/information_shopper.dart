@@ -40,10 +40,7 @@ class _InformationShopperState extends State<InformationShopper> {
   Widget build(BuildContext context) {
     screen = MediaQuery.of(context).size.width;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, '/addInformation'),
-        child: MyStyle().titleH3Dark('Edit'),
-      ),
+      floatingActionButton: buildEdit(context),
       body: Center(
         child: Column(
           children: [
@@ -56,11 +53,20 @@ class _InformationShopperState extends State<InformationShopper> {
     );
   }
 
+  FloatingActionButton buildEdit(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () => Navigator.pushNamed(context, '/addInformation'),
+      child: MyStyle().titleH3Dark('Edit'),
+    );
+  }
+
   Container buildImage() {
     return Container(
       width: screen * 0.5,
       height: screen * 0.5,
-      child: MyStyle().showImage(),
+      child: typeUserModel.urlshopper == null
+          ? MyStyle().showImage()
+          : Image.network(typeUserModel.urlshopper),
     );
   }
 }

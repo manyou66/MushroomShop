@@ -7,6 +7,8 @@ class MyStyle {
   Color primaryColor = Color(0xffff5252);
   Color lightColor = Color(0xffff867f);
 
+  Widget showProgress()=>CircularProgressIndicator();
+
   Column buildSignOut(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -59,6 +61,14 @@ class MyStyle {
           fontSize: 16,
           // fontWeight: FontWeight.w700,
           color: darkColor,
+        ),
+      );
+  Widget titleH3White(String string) => Text(
+        string,
+        style: TextStyle(
+          fontSize: 16,
+          // fontWeight: FontWeight.w700,
+          color: Colors.white,
         ),
       );
 
