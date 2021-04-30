@@ -1,3 +1,4 @@
+import 'package:browniesuppermall/models/product_model.dart';
 import 'package:browniesuppermall/utility/my_style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,6 +12,7 @@ class ShowProduct extends StatefulWidget {
 
 class _ShowProductState extends State<ShowProduct> {
   bool load = true, haveProduct;
+  List<ProductModel> productModels = [];
 
   @override
   void initState() {
@@ -20,6 +22,10 @@ class _ShowProductState extends State<ShowProduct> {
   }
 
   Future<Null> readData() async {
+    if (productModels.length != 0) {
+      productModels.clear();
+    }
+
     await Firebase.initializeApp().then((value) async {
       FirebaseAuth.instance.authStateChanges().listen((event) async {
         await FirebaseFirestore.instance
@@ -34,10 +40,14 @@ class _ShowProductState extends State<ShowProduct> {
               load = false;
             });
           } else {
-            setState(() {
-              haveProduct = true;
-              load = false;
-            });
+            for (var item in event.docs) {
+              ProductModel model = ProductModel.fromMap(item.data());
+              setState(() {
+                haveProduct = true;
+                load = false;
+                productModels.add(model);
+              });
+            }
           }
         });
       });
@@ -48,13 +58,50 @@ class _ShowProductState extends State<ShowProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: ElevatedButton(
-          onPressed: () => Navigator.pushNamed(context, '/addProduct'),
+          onPressed: () => Navigator.pushNamed(context, '/addProduct')
+              .then((value) => readData()),
           child: Text('Add Product')),
       body: load
           ? MyStyle().showProgress()
           : haveProduct
-              ? Text('Have Product')
+              ? buildListView()
               : Center(child: MyStyle().titleH1('No Product')),
+    );
+  }
+
+  ListView buildListView() {
+    return ListView.builder(
+      itemCount: productModels.length,
+      itemBuilder: (context, index) => Card(color: index%2==0 ? Colors.green[100]: Colors.white ,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MyStyle().titleH1(productModels[index].nameProduct),
+                  MyStyle().titleH2Dark(
+                      'ราคา ${productModels[index].price} บาท/${productModels[index].unit}')
+                ],
+            ),
+            Row(
+                children: [
+                  Expanded(flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.network(productModels[index].pathProduct),
+                    ),
+                  ),
+                  Expanded(flex: 1,
+                    child: Text(productModels[index].detail),
+                  ),
+                ],
+            )
+          ],
+        ),
+              ),
+      ),
     );
   }
 }
